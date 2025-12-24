@@ -1,0 +1,41 @@
+name: Build and Deploy TypeScript Project
+
+on:
+  push:
+    branches:
+      - main  # Run this workflow on every push to main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Compile TypeScript/TSX
+      - name: Compile TypeScript
+        run: npx tsc
+
+      # 5️⃣ Optional: Build Tailwind CSS (if project uses Tailwind)
+      - name: Build Tailwind CSS
+        if: exists('./tailwind.config.js')
+        run: npx tailwindcss -i ./index.css -o ./dist/index.css --minify
+
+      # 6️⃣ Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
