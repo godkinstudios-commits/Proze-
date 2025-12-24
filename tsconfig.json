@@ -1,29 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  }
+    "target": "ES6",               // Output JavaScript version
+    "module": "ESNext",            // Use ES modules
+    "jsx": "react-jsx",            // Compile TSX as React JSX
+    "outDir": "./dist",            // Output folder for compiled JS
+    "strict": true,                // Enable strict type checking
+    "esModuleInterop": true,       // Enable import/export interop
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,          // Skip type checking of node_modules
+    "moduleResolution": "node",    // Resolve modules like Node.js
+    "sourceMap": true              // Generate source maps for debugging
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
